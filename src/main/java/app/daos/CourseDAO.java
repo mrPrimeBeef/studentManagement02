@@ -1,6 +1,7 @@
 package app.daos;
 
 import app.entities.Course;
+import app.entities.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -45,6 +46,13 @@ public class CourseDAO implements IDAO<Course> {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Course> query = em.createQuery("SELECT c FROM Course c", Course.class);
             return query.getResultList();
+        }
+    }
+    public List<Course> readAllByCourse(Student student) {
+        try(EntityManager em = emf.createEntityManager()){
+        TypedQuery<Course> query = em.createQuery("SELECT c FROM Course c WHERE c.id = :id", Course.class);
+        query.setParameter("id",student.getId());
+        return query.getResultList();
         }
     }
 

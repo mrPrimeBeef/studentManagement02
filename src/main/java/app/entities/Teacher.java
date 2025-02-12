@@ -23,6 +23,7 @@ public class Teacher {
     @Setter
     private String zoom;
 
+    @Builder.Default
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<Course> courses = new HashSet<>();

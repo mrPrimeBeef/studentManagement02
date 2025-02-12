@@ -42,8 +42,14 @@ public class Main {
         c1.addStudent(s1);
         c1.addStudent(s2);
         courseDAO.update(c1);
+        t1.addCourse(c1);
+        teacherDAO.update(t1);
 
-        studentDAO.readAllByCourse(c1).forEach(System.out::println);
+//        studentDAO.readAllByCourse(c1).forEach(System.out::println);
+
+//        courseDAO.readAllByCourse(s1).forEach(System.out::println);
+
+        teacherDAO.readAllCoursesByTeacher(t1).forEach(System.out::println);
 
 
     }

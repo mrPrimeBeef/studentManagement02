@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,6 +36,7 @@ public class Course {
     @ManyToOne
     @ToString.Exclude
     private Teacher teacher;
+
 
     public Course(String description, LocalDate endDate, LocalDate startDate) {
         this.description = description;
