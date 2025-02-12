@@ -1,5 +1,6 @@
 package app.daos;
 
+import app.entities.Course;
 import app.entities.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -15,7 +16,7 @@ public class StudentDAO implements IDAO<Student> {
         this.emf = emf;
     }
 
-    public StudentDAO getInstance(EntityManagerFactory emf) {
+    public static StudentDAO getInstance(EntityManagerFactory emf) {
         if (instance == null) {
             instance = new StudentDAO(emf);
         }
@@ -24,7 +25,7 @@ public class StudentDAO implements IDAO<Student> {
 
     @Override
     public Student create(Student student) {
-        try(EntityManager em = emf.createEntityManager()){
+        try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(student);
             em.getTransaction().commit();
@@ -34,23 +35,30 @@ public class StudentDAO implements IDAO<Student> {
 
     @Override
     public Student readById(int id) {
-        try(EntityManager em = emf.createEntityManager()){
-            return em.find(Student.class,id);
+        try (EntityManager em = emf.createEntityManager()) {
+            return em.find(Student.class, id);
         }
     }
 
     @Override
     public List<Student> readAll() {
-        try(EntityManager em = emf.createEntityManager()){
-            em.getTransaction().begin();
-            TypedQuery<Student> query = em.createQuery("SELECT s FROM Student s",Student.class);
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Student> query = em.createQuery("SELECT s FROM Student s", Student.class);
+            return query.getResultList();
+        }
+    }
+
+    public List<Student> readAllByCourse(Course course) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Student> query = em.createQuery("SELECT s FROM Student s WHERE course.id=:id", Student.class);
+            query.setParameter("id", course.getId());
             return query.getResultList();
         }
     }
 
     @Override
     public Student update(Student student) {
-        try(EntityManager em = emf.createEntityManager()){
+        try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.merge(student);
             em.getTransaction().commit();
@@ -60,7 +68,7 @@ public class StudentDAO implements IDAO<Student> {
 
     @Override
     public void delete(Student student) {
-        try(EntityManager em = emf.createEntityManager()){
+        try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.remove(student);
             em.getTransaction().commit();

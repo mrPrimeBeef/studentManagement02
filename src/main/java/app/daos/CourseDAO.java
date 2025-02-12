@@ -6,20 +6,19 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
-import java.util.Set;
 
-public class CourseDao implements IDAO<Course> {
+public class CourseDAO implements IDAO<Course> {
 
-    private static CourseDao instance;
+    private static CourseDAO instance;
     private static EntityManagerFactory emf;
 
-    private CourseDao(EntityManagerFactory emf) {
+    private CourseDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-    public static CourseDao getInstance(EntityManagerFactory emf) {
+    public static CourseDAO getInstance(EntityManagerFactory emf) {
         if (instance == null) {
-            instance = new CourseDao(emf);
+            instance = new CourseDAO(emf);
         }
         return instance;
     }

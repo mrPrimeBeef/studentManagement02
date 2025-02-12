@@ -27,5 +27,11 @@ public class Teacher {
     @ToString.Exclude
     private Set<Course> courses = new HashSet<>();
 
+    public void addCourse(Course course) {
+        if (course != null) {
+            this.courses.add(course);
+            course.setTeacher(this);
+        }
+    }
 
 }

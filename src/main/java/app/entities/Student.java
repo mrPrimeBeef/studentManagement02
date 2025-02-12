@@ -22,6 +22,7 @@ public class Student {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    @Setter
     @ManyToOne
     @ToString.Exclude
     private Course course;
@@ -35,5 +36,6 @@ public class Student {
     private void addUpdated(){
         updatedAt = LocalDateTime.now();
     }
+
 
 }

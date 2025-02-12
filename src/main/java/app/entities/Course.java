@@ -26,10 +26,12 @@ public class Course {
     private LocalDate endDate;
     private LocalDate startDate;
 
+    @Builder.Default
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<Student> students = new HashSet<>();
 
+    @Setter
     @ManyToOne
     @ToString.Exclude
     private Teacher teacher;
@@ -38,5 +40,12 @@ public class Course {
         this.description = description;
         this.endDate = endDate;
         this.startDate = startDate;
+    }
+
+    public void addStudent(Student student) {
+        if (student != null) {
+            this.students.add(student);
+            student.setCourse(this);
+        }
     }
 }
