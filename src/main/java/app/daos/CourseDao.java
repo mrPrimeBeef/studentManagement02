@@ -3,10 +3,12 @@ package app.daos;
 import app.entities.Course;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
 
 import java.util.List;
+import java.util.Set;
 
-public class CourseDao implements IDAO<Course>{
+public class CourseDao implements IDAO<Course> {
 
     private static CourseDao instance;
     private static EntityManagerFactory emf;
@@ -24,7 +26,7 @@ public class CourseDao implements IDAO<Course>{
 
     @Override
     public Course create(Course course) {
-        try (EntityManager em = emf.createEntityManager()){
+        try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(course);
             em.getTransaction().commit();
@@ -32,10 +34,21 @@ public class CourseDao implements IDAO<Course>{
         }
     }
 
-//    @Override
-//    public Object read() {
-//        return null;
-//    }
+    @Override
+    public Course readById(int id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            return em.find(Course.class, id);
+        }
+    }
+
+    @Override
+    public List<Course> readAll() {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Course> query = em.createQuery("SELECT c FROM Course c", Course.class);
+            return query.getResultList();
+        }
+    }
+
 //
 //    @Override
 //    public List readAll() {
