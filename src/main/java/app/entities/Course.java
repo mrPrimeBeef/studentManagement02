@@ -1,5 +1,6 @@
 package app.entities;
 
+import app.enums.CourseName;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,6 +21,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String description;
+    private CourseName courseName;
     private LocalDate endDate;
     private LocalDate startDate;
 

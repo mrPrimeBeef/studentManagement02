@@ -1,5 +1,8 @@
 package app.config;
 
+import app.entities.Course;
+import app.entities.Student;
+import app.entities.Teacher;
 import app.utils.Utils;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
@@ -39,7 +42,9 @@ public class HibernateConfig {
 
     // TODO: IMPORTANT: Add Entity classes here for them to be registered with Hibernate
     private static void getAnnotationConfiguration(Configuration configuration) {
-        //     configuration.addAnnotatedClass(Entity.class);
+             configuration.addAnnotatedClass(Course.class);
+             configuration.addAnnotatedClass(Student.class);
+             configuration.addAnnotatedClass(Teacher.class);
 
     }
 
@@ -75,11 +80,11 @@ public class HibernateConfig {
     private static Properties setBaseProperties(Properties props) {
         props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         props.put("hibernate.connection.driver_class", "org.postgresql.Driver");
-        props.put("hibernate.hbm2ddl.auto", "update");
+        props.put("hibernate.hbm2ddl.auto", "create");
         props.put("hibernate.current_session_context_class", "thread");
-        props.put("hibernate.show_sql", "true");
-        props.put("hibernate.format_sql", "true");
-        props.put("hibernate.use_sql_comments", "true");
+        props.put("hibernate.show_sql", "false");
+        props.put("hibernate.format_sql", "false");
+        props.put("hibernate.use_sql_comments", "false");
         return props;
     }
 
@@ -106,7 +111,7 @@ public class HibernateConfig {
         props.put("hibernate.connection.username", "postgres");
         props.put("hibernate.connection.password", "postgres");
         props.put("hibernate.archive.autodetection", "class");
-        props.put("hibernate.show_sql", "true");
+        props.put("hibernate.show_sql", "false");
         props.put("hibernate.hbm2ddl.auto", "create-drop"); // update for production
         return props;
     }
