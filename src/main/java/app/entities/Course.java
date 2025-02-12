@@ -1,12 +1,17 @@
 package app.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
+@DynamicUpdate
 @Entity
 public class Course {
     @Id
@@ -15,4 +20,8 @@ public class Course {
     private String description;
     private LocalDate endDate;
     private LocalDate startDate;
+
+    @ManyToOne
+    @ToString.Exclude
+    private Student student;
 }
