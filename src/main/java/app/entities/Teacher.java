@@ -1,11 +1,11 @@
 package app.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor
@@ -21,4 +21,10 @@ public class Teacher {
     private String email;
     private String name;
     private String zoom;
+
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private Set<Course> courses = new HashSet<>();
+
+
 }

@@ -23,9 +23,13 @@ public class Course {
     private LocalDate endDate;
     private LocalDate startDate;
 
-    @OneToMany
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<Student> students = new HashSet<>();
+
+    @ManyToOne
+    @ToString.Exclude
+    private Teacher teacher;
 
     public Course(String description, LocalDate endDate, LocalDate startDate) {
         this.description = description;
