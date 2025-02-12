@@ -19,6 +19,7 @@ public class Main {
 
         Student s1 = Student.builder().name("Rolf").email("test@test.dk").build();
         Student s2 = Student.builder().name("Jørgen").email("test@test.de").build();
+        Student s3 = Student.builder().name("Bent").email("test@test.se").build();
 
         Teacher t1 = Teacher.builder().email("testy@testy.test").name("Jon").zoom("HALLO").build();
         Teacher t2 = Teacher.builder().email("testy1@testy.test").name("Thomas").zoom("HALLO").build();
@@ -28,6 +29,7 @@ public class Main {
 
         studentDAO.create(s1);
         studentDAO.create(s2);
+        studentDAO.create(s3);
 
         courseDAO.create(c1);
         courseDAO.create(c2);
@@ -41,16 +43,27 @@ public class Main {
 
         c1.addStudent(s1);
         c1.addStudent(s2);
+
+        c2.addStudent(s3);
+
         courseDAO.update(c1);
         t1.addCourse(c1);
         teacherDAO.update(t1);
+//        t2.addCourse(c2);
+
+        c2.setTeacher(t2);
+//        teacherDAO.update(t2);
+        courseDAO.update(c2);
 
 //        studentDAO.readAllByCourse(c1).forEach(System.out::println);
 
 //        courseDAO.readAllByCourse(s1).forEach(System.out::println);
 
-        teacherDAO.readAllCoursesByTeacher(t1).forEach(System.out::println);
+//        teacherDAO.readAllCoursesByTeacher(t1).forEach(System.out::println);
 
+        studentDAO.readAllByTeacher(t1).forEach(System.out::println);
+        System.out.println();
+        studentDAO.readAllByTeacher(t2).forEach(System.out::println);
 
     }
 }
