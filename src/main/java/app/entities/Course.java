@@ -20,6 +20,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Setter
     private String description;
     private CourseName courseName;
     private LocalDate endDate;

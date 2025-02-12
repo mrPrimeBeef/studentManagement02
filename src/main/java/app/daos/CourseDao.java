@@ -49,19 +49,24 @@ public class CourseDao implements IDAO<Course> {
         }
     }
 
-//
-//    @Override
-//    public List readAll() {
-//        return List.of();
-//    }
-//
-//    @Override
-//    public Object update(Object o) {
-//        return null;
-//    }
-//
-//    @Override
-//    public void delete(Object o) {
-//
-//    }
+
+    @Override
+    public Course update(Course course) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.merge(course);
+            em.getTransaction().commit();
+            return course;
+        }
+    }
+
+
+    @Override
+    public void delete(Course course) {
+        try(EntityManager em=emf.createEntityManager()){
+            em.getTransaction().begin();
+            em.remove(course);
+            em.getTransaction().commit();
+        }
+    }
 }

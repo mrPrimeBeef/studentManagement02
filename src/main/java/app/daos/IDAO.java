@@ -9,6 +9,6 @@ public interface IDAO<T> {
     T create(T t);
     T readById(int id);
     List<T> readAll();
-//    T update(T t);
-//    void delete(T t);
+    T update(T t);
+    void delete(T t);
 }

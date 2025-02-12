@@ -16,12 +16,17 @@ public class Main {
         Student s1 = Student.builder().name("Rolf").email("test@test.dk").build();
 //        Teacher t1 = Teacher.builder().
         Course c1 = Course.builder().description("Coding class").courseName(CourseName.MATH).build();
-        Course c2 = Course.builder().description("Cooking class").courseName(CourseName.ART).build();
+        Course c2 = Course.builder().description("Here we paint").courseName(CourseName.ART).build();
 
         courseDao.create(c1);
         courseDao.create(c2);
 
+        c2.setDescription("Explore your creativity wiht MS Paint");
+        courseDao.update(c2);
+
         System.out.println(courseDao.readById(1));
+
+        courseDao.delete(c1);
 
         courseDao.readAll().forEach(System.out::println);
     }
