@@ -20,6 +20,7 @@ public class Teacher {
     private Integer id;
     private String email;
     private String name;
+    @Setter
     private String zoom;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
