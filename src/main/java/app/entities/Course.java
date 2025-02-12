@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor
@@ -21,7 +23,13 @@ public class Course {
     private LocalDate endDate;
     private LocalDate startDate;
 
-    @ManyToOne
+    @OneToMany
     @ToString.Exclude
-    private Student student;
+    private Set<Student> students = new HashSet<>();
+
+    public Course(String description, LocalDate endDate, LocalDate startDate) {
+        this.description = description;
+        this.endDate = endDate;
+        this.startDate = startDate;
+    }
 }

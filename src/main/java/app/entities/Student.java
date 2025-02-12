@@ -1,9 +1,6 @@
 package app.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -24,5 +21,19 @@ public class Student {
     private String name;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @ManyToOne
+    @ToString.Exclude
+    private Course course;
+
+    @PrePersist
+    private void addCreated(){
+        createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    private void addUpdated(){
+        updatedAt = LocalDateTime.now();
+    }
 
 }
